@@ -13,3 +13,5 @@ Things you need to specify in the file:
     1)Your File name
     2)Your dropbox access token
     Thats it.
+
+I Do NOT Take any responsibility for misuse of the program this is made purely for educational purposes.
